@@ -29,3 +29,14 @@ export const decrease = (book:Book) => {
         payload: book
     }
 }
+//******************************* 
+export const getBooks = () => (dispatch:any) => {
+    fetch("http://localhost:8080/books")
+        .then(response => {
+           return response.json();          
+        }).then(data => {           console.log("DATA:",data);
+            dispatch({
+                type:"GET_BOOKS", payload: data 
+            });
+        });
+}

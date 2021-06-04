@@ -1,6 +1,10 @@
 import { data } from "../data";
-import { createStore } from "redux";
+//import { applyMiddleware, createStore } from "redux";
 import { Book,  CartModel, ADD_TO_CART, REMOVE_FROM_CART, INCREASE_CART, DECREASE_CART, ListAction } from '../types';
+// import { useEffect, useState } from "react";
+// import { getProducts } from "../util/APIUtils";
+// import axios from "axios";
+// import thunk from "redux-thunk";
 
 
 export interface ReducerState { 
@@ -12,6 +16,20 @@ export const INITIAL_STATE: ReducerState = {
     books: data,
     cart: {items: []}
 }
+
+// export default function Api() {
+//     const [dataApi, setDataApi] = useState([]as Book[]);
+
+//     useEffect(() => { 
+//         axios
+//             .get("https://restcountries.eu/rest/v2/all")
+//             .then(response => setDataApi(response.data))
+//             .catch(error => console.log({ error }));
+//         console.log("DATA:", dataApi);
+// }, [])
+// }
+
+
 
 
 export const  reducer = (
@@ -64,4 +82,5 @@ export const  reducer = (
             return state;
     }
 };
-export const store = createStore(reducer);
+
+// export const store = createStore(reducer, applyMiddleware(thunk));
