@@ -1,29 +1,68 @@
 import './App.css';
 import { Link } from "react-router-dom";
-import { connect } from 'react-redux'; 
+import { connect, useSelector } from 'react-redux'; 
 import { addToCart } from './actions'
 import { Book, CartModel } from './types';
 import { ReducerState } from './reducers';
+import { useEffect, useState } from "react";
+//import axios from "axios";
+import { useDispatch } from 'react-redux';
+//import { getBooks } from './actions';
+//import { getBooks } from './actions';
+
 
 
 const Products = (props:{ books: Book[], addToCart: Function,  cart:CartModel }) => {
+
+
+const books:Book[] = useSelector((state:ReducerState) => state.books); console.log("SELECTOR.books:", books);
+const cart:CartModel = useSelector((state:ReducerState) => state.cart); //console.log("SELECTOR.books:", books);
+
+
+const [dataApi, setDataApi] = useState([]as Book[]);  
+const dispatch = useDispatch();
+
+  useEffect(() => { 
+        // axios
+        //     // .get("https://restcountries.eu/rest/v2/all")
+        //     .get("http://localhost:8080/books")
+        //     .then(response => {console.log("DATA:", response)
+        //       setDataApi(response.data)
+        //     }
+        //       )
+        //     .catch(error => console.log({ error }));
+
+
+      fetch("http://localhost:8080/books")
+        .then(response => {           //console.log("RESULT:", response)
+          return response.json();
+        }).then(data => {          //console.log("DATA:",data)
+          setDataApi(data);
+        })
+        //dispatch(getBooks());
+  }, []);
+  
+
+
+
   return (
     <div>
       <h3>
         <span style={{padding:"0 0 0 10px"}}>Products</span>
         <div style={{float:"right", padding:"0 10px 0 0"}}>
-        <Link to="/cart">My Cart({ props.cart.items.reduce((total, item) => (total += item.count), 0 )})</Link>
+        <Link to="/cart">My Cart({ cart.items.reduce((total, item) => (total += item.count), 0 )})</Link>
         </div>
       </h3>
-      <div>
-        {props.books.map((book:Book) => (
+      <div> 
+        {dataApi.map((book:Book) => (
+        // {props.books.map((book:Book) => (
           <div className="book">
             <img src={book.image} alt={book.name} />
-              <div className="bookContent"  key={book.id}>
+              <div className="bookContent"  key={book._id}>
                 <h4>{book.name}</h4>
                 <p>Price: {book.price}£</p>
                 <p>Author: {book.author}</p>
-                <button onClick={()=> props.addToCart(book)}>Add to Cart</button>
+                <button onClick={()=> dispatch(addToCart(book))}>Add to Cart</button>
               </div>
           </div>
         ))}
@@ -32,14 +71,16 @@ const Products = (props:{ books: Book[], addToCart: Function,  cart:CartModel })
   );
 }
 
-const mapStateToProps = (state:ReducerState) => {
-  return{
-    books: state.books,
-    cart: state.cart 
-  }
-}
+// const mapStateToProps = (state:ReducerState) => { //console.log("STATE:",state.books);
+//   return {
+//     books: state.books,
+//     cart: state.cart 
+//   }
+// }
 
 // const mapActionsToProps = ({ addToCart })
 // export default connect (mapStateToProps, mapActionsToProps)(Products);
 
-export default connect (mapStateToProps,{ addToCart })(Products);
+// export default connect (mapStateToProps,{ addToCart })(Products);
+
+export default Products;

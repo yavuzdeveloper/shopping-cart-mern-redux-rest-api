@@ -3,37 +3,16 @@ import './App.css';
 import Products from './Products';
 import Cart from './Cart';
 import { Route } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { Book } from './types';
-import { useDispatch } from 'react-redux';
-import { getBooks } from './actions';
+// import { useEffect, useState } from "react";
+// import axios from "axios";
+// import { Book } from './types';
+// import { useDispatch } from 'react-redux';
+// import { getBooks } from './actions';
 
 
 
 const App = (props:any) => {
-   const [dataApi, setDataApi] = useState([]as Book[]);
-
-   const dispatch = useDispatch();
-
-    useEffect(() => { 
-        // axios
-        //     // .get("https://restcountries.eu/rest/v2/all")
-        //     .get("http://localhost:8080/books")
-        //     .then(response => {console.log("DATA:", response)
-        //       setDataApi(response.data)
-        //     }
-        //       )
-        //     .catch(error => console.log({ error }));
-
-      // fetch("http://localhost:8080/books")
-      //   .then(result => {
-      //     return result.json();
-      //   }).then(data => {
-      //     console.log("DATA:",data);
-      //   })
-        dispatch(getBooks());
-}, [])
+ 
 
 
 

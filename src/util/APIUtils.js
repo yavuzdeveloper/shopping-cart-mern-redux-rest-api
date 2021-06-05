@@ -1,6 +1,7 @@
+import axios from "axios";
 import { request } from "node:http";
 
-export const API_BASE_URL = 'http://localhost:8080/api';
+export const baseURL = 'http://localhost:8080';
 
 // export function getProducts() {
 //     return request({
@@ -12,7 +13,13 @@ export const API_BASE_URL = 'http://localhost:8080/api';
 
 export function getProducts() {
     return request({
-        url:"http://localhost:8080/books",
+        url:baseURL +'/books',
         method: "GET"
+    });
+}
+
+export function api() { // api().get("/posts");
+    return axios.create({
+        url:baseURL,
     });
 }

@@ -1,4 +1,4 @@
-import { Book, ADD_TO_CART, REMOVE_FROM_CART, DECREASE_CART, INCREASE_CART } from '../types';
+import { Book, ADD_TO_CART, REMOVE_FROM_CART, DECREASE_CART, INCREASE_CART, GET_BOOKS } from '../types';
 
 
 
@@ -8,6 +8,9 @@ export const addToCart = (book:Book) => {
         payload: book
     };
 } 
+
+
+
 
 export const removeFromCart = (book:Book) => { 
     return { 
@@ -30,13 +33,20 @@ export const decrease = (book:Book) => {
     }
 }
 //******************************* 
-export const getBooks = () => (dispatch:any) => {
+export const getBooks = () => (dispatch:any) => { 
     fetch("http://localhost:8080/books")
-        .then(response => {
+        .then(response => {          //console.log("RESPONSE-getBooks:",response);
            return response.json();          
-        }).then(data => {           console.log("DATA:",data);
+        }).then(data => {            //console.log("DATA-getBooks:",data);
             dispatch({
-                type:"GET_BOOKS", payload: data 
+                type: GET_BOOKS, 
+                payload: data 
+            });
+        })
+        .catch(() => {
+            dispatch({
+                type: "ERROR",
+                payload: "Error getting books", 
             });
         });
 }
