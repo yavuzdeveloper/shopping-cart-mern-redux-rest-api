@@ -44,10 +44,13 @@ export const  reducer = (
     let items = state.cart.items;
     switch (action.type) {
 
-        case GET_BOOKS:   console.log("BB:", action.payload);            
+        case GET_BOOKS:       console.log("BB:", action.payload);            
             state.books.push(action.payload)
-           // return { ...state, bookList: action.payload, error:"" };
-            // console.log("CC", state.books[0]);
+           
+            // return { ...state, 
+            //     books: action.payload, error:"" };
+           
+             // console.log("CC", state.books[0]);
             // let Books = state.books[0];
             // console.log("STATE.BOOKS:", state.books);
             return state; 

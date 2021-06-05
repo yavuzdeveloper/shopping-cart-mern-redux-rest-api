@@ -1,18 +1,23 @@
 
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { CartItem, CartModel } from './types';
-import { removeFromCart, decrease, increase } from './actions'
+import { removeFromCart, decrease, increase, getBooksFromCart } from './actions'
 import { ReducerState} from './reducers';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const Cart = (props:{ cart:CartModel, decrease:Function, 
     removeFromCart: Function, increase: Function}) => { 
 
     const cart:CartModel = useSelector((state:ReducerState) => state.cart); //console.log("SELECTOR.cart:", cart);
     const dispatch = useDispatch();
-            
+     
+    useEffect(() => {
+        dispatch(getBooksFromCart());
+    }, [])
 
-    const totalPrice = props.cart.items.reduce((total, item) => 
+
+    const totalPrice = cart.items.reduce((total, item) => 
         (total += (item.count)*(item.book.price)), 0 );
     
     return ( 
