@@ -3,7 +3,8 @@ export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const INCREASE_CART = 'INCREASE_CART';
 export const DECREASE_CART = 'DE_CREASE_CART';
 export const GET_BOOKS = "GET_BOOKS";
-export const GET_BOOKS_FROM_CART = 'GET_BOOKS_FROM_CART'
+export const GET_BOOKS_FROM_CART = 'GET_BOOKS_FROM_CART';
+export const ADDCART = "ADDCART";
 
 interface AddCartAction {
   type: typeof ADD_TO_CART;
@@ -30,7 +31,14 @@ interface GetBooksFromCartAction {
   type: typeof GET_BOOKS_FROM_CART;
   payload: Book;
 }
-export type ListAction = AddCartAction | RemoveCartAction | IncreaseCartAction | DecreaseCartAction | GetBooksAction | GetBooksFromCartAction;
+
+interface addBookToCart {
+  type: typeof ADDCART;
+  payload: Book;
+}
+
+
+export type ListAction = AddCartAction | RemoveCartAction | IncreaseCartAction | DecreaseCartAction | GetBooksAction | GetBooksFromCartAction | addBookToCart;
 
 export interface Book {
   _id: number;

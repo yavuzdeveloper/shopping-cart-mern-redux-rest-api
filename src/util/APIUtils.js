@@ -23,3 +23,12 @@ export function api() { // api().get("/posts");
         url:baseURL,
     });
 }
+
+
+export function addBookCart(book) { // api().get("/posts");
+    return request({
+        url:baseURL +'/books',
+        method: "POST",
+        body: JSON.stringify(book)
+    });
+}

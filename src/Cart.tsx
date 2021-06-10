@@ -11,7 +11,9 @@ const Cart = (props:{ cart:CartModel, decrease:Function,
 
     const cart:CartModel = useSelector((state:ReducerState) => state.cart); //console.log("SELECTOR.cart:", cart);
     const dispatch = useDispatch();
-     
+
+console.log("CARTITEMS:", cart.items);     
+
     useEffect(() => {
         dispatch(getBooksFromCart());
     }, [])
@@ -28,7 +30,7 @@ const Cart = (props:{ cart:CartModel, decrease:Function,
                     <span>My Cart ({ cart.items.reduce((total, item) => (total += item.count), 0 )})</span>
                 </div>    
             </h3>
-            <div className="cart">
+            <div className="cart"> 
                { !cart.items.length && 
                <div className="empty">
                    <h3>Your Cart Empty</h3>
