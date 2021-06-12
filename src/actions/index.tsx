@@ -35,44 +35,30 @@ export const decrease = (book:Book) => {
         payload: book
     }
 }
-type DispatchAddCoins = (type: any, payload: Book[]) => (Book[]);
 //******************************* 
-// export const getBooks = () => (dispatch:any) => { 
-    export const getBooks = () => (dispatch:DispatchAddCoins) => { 
 
-// fetch(`http://swapi.co/api/people/1/`)
-//       .then(res => res.json())
-//       .then((res: Book) => {
-//           console.log("DATA-getBooks:",res);
-//       });
 
-    // fetch("http://localhost:8080/books")
-    //     .then(response => {          //console.log("RESPONSE-getBooks:",response);
-    //        return response.json();
-    //     // return response.json<Book[]>();          
-    //     })
-    //     .then((books: Book[]) => {
-    //       console.log("DATA-getBooks:",books);
-    //       dispatch({
-    //             type: GET_BOOKS, 
-    //             payload: books 
-    //         });
-    //     })
-        // .then(data => {
-        //     // let a : Book[] = [];
-        //     // dispatch(a);
-        //     //console.log("DATA-getBooks:",data);
+    interface DispatchGetBooks  {
+        type: string;
+        payload: Book[];
+    }
 
-        //     dispatch({
-        //         type: GET_BOOKS, 
-        //         payload: data 
-        //     });
-            
-        // })
-        // .catch(error => { 
-        //     console.log(error.message);
-        //  });
-}
+    export const getBooks = () => (dispatch:(arg:DispatchGetBooks) => (DispatchGetBooks)) => { 
+        fetch("http://localhost:8080/books")
+            .then(response => {          
+            return response.json();      
+            })
+            .then((books: Book[]) => {
+                dispatch({
+                    type: GET_BOOKS, 
+                    payload: books 
+                });
+            })
+            .catch(error => { 
+                console.log(error.message);
+            });
+    }
+
 
 export const getBooksFromCart = () => (dispatch:any)=> { 
       fetch("http://localhost:8080/cart")

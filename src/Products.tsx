@@ -1,6 +1,6 @@
 import './App.css';
 import { Link } from "react-router-dom";
-import { connect, useSelector } from 'react-redux'; 
+import { useSelector } from 'react-redux'; 
 import { addToCart, addBookToCart } from './actions'
 import { Book, CartModel } from './types';
 import { ReducerState } from './reducers';
@@ -17,10 +17,10 @@ const Products = (props:{ books: Book[], addToCart: Function,  cart:CartModel })
 const books:Book[] = useSelector((state:ReducerState) => state.books); 
                                               console.log("SELECTOR.books:", books);
                                               //console.log("SELECTOR.books[0]:", books[0]);
-const [bookList, setBookList] = useState([] as Book[]); 
-books.map(item => {
-//console.log("BOOK:",item);
-});                                              
+// const [bookList, setBookList] = useState([] as Book[]); 
+// books.map(item => {
+// //console.log("BOOK:",item);
+// });                                              
 
 
 const cart:CartModel = useSelector((state:ReducerState) => state.cart); 
@@ -31,9 +31,11 @@ const dispatch = useDispatch();
   useEffect(() => { 
 
       fetch("http://localhost:8080/books")
-        .then(response => {           //console.log("RESULT:", response)
+        .then(response => {           
+          //console.log("RESULT:", response)
           return response.json();
-        }).then(data => {          //console.log("DATA:",data)
+        }).then(data => {          
+          //console.log("DATA:",data)
           setDataApi(data);
         })
 
@@ -52,7 +54,7 @@ const dispatch = useDispatch();
       </h3>
       <div> 
         {/* {dataApi.map((book:Book) => ( */}
-         { books.map((book:Book) => (
+        { books.map((book:Book) => (
         // {props.books.map((book:Book) => (
           <div className="book">
             <img src={book.image} alt={book.name} />
@@ -70,7 +72,8 @@ const dispatch = useDispatch();
   );
 }
 
-// const mapStateToProps = (state:ReducerState) => { //console.log("STATE:",state.books);
+// const mapStateToProps = (state:ReducerState) => { 
+  //console.log("STATE:",state.books);
 //   return {
 //     books: state.books,
 //     cart: state.cart 

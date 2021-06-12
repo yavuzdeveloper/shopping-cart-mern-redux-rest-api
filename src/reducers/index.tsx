@@ -48,14 +48,17 @@ export const  reducer = (
 
         case GET_BOOKS:     
           console.log("REDUCER action.Payload:", action.payload);            
-        // let Books : Book[] = [];        
-        // Books.push(action.payload); //console.log("Books[0]:", Books[0]);   
-        
-        return { ...state, books: [...state.books, action.payload] } //add yaparken
+        //let Books : Book[] = [];        
+        //Books.push(action.payload); 
+        //console.log("Books[0]:", Books[0]);   
+        //const array: Book[] = [...Book, ]
+        // return { ...state, 
+        //     books: [...state.books, action.payload] 
+        // } 
 
 
-        // return { ...state, books: [...state.books, ...Books]  }
-        //  return { ...state, books: action.payload} //get yaperken.
+       // return { ...state, books: [...state.books, ...Books]  }
+          return { ...state, books: action.payload} 
            
             // return { ...state, 
             //     books: [...state.books, action.payload]
