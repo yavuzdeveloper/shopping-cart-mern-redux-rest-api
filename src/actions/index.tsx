@@ -1,8 +1,10 @@
 import axios from 'axios';
+import { ThunkDispatch } from 'redux-thunk';
 // import { request } from 'node:https';
 import { Book, ADD_TO_CART, REMOVE_FROM_CART, DECREASE_CART, INCREASE_CART, 
     GET_BOOKS, GET_BOOKS_FROM_CART, ADDCART } from '../types';
-import { api, addBookCart } from "../util/APIUtils";
+//import { api, addBookCart, insertBook } from "../util/APIUtils";
+
 
 
 
@@ -33,19 +35,43 @@ export const decrease = (book:Book) => {
         payload: book
     }
 }
-
+type DispatchAddCoins = (type: any, payload: Book[]) => (Book[]);
 //******************************* 
-export const getBooks = () => (dispatch:any) => { 
-    fetch("http://localhost:8080/books")
-        .then(response => {          //console.log("RESPONSE-getBooks:",response);
-           return response.json();          
-        }).then(data => {            //console.log("DATA-getBooks:",data);
-            dispatch({
-                type: GET_BOOKS, 
-                payload: data 
-            });
-        })
-        .catch((error) => { console.log(error.message) });
+// export const getBooks = () => (dispatch:any) => { 
+    export const getBooks = () => (dispatch:DispatchAddCoins) => { 
+
+// fetch(`http://swapi.co/api/people/1/`)
+//       .then(res => res.json())
+//       .then((res: Book) => {
+//           console.log("DATA-getBooks:",res);
+//       });
+
+    // fetch("http://localhost:8080/books")
+    //     .then(response => {          //console.log("RESPONSE-getBooks:",response);
+    //        return response.json();
+    //     // return response.json<Book[]>();          
+    //     })
+    //     .then((books: Book[]) => {
+    //       console.log("DATA-getBooks:",books);
+    //       dispatch({
+    //             type: GET_BOOKS, 
+    //             payload: books 
+    //         });
+    //     })
+        // .then(data => {
+        //     // let a : Book[] = [];
+        //     // dispatch(a);
+        //     //console.log("DATA-getBooks:",data);
+
+        //     dispatch({
+        //         type: GET_BOOKS, 
+        //         payload: data 
+        //     });
+            
+        // })
+        // .catch(error => { 
+        //     console.log(error.message);
+        //  });
 }
 
 export const getBooksFromCart = () => (dispatch:any)=> { 
@@ -64,76 +90,73 @@ export const getBooksFromCart = () => (dispatch:any)=> {
 //add yaparken eğer cart içinde selectedbook varsa onun count unu bir attırcaz yani sepetteki book u update yapcaz,
 //eğer selectedook cart ta yoksa eklicez yani post yapcaz
 
-export const addBookToCart = (book:Book) => async (dispatch:any) => {  
-    // alert(book._id);
+export const addBookToCart = (book:Book) => async (dispatch:any) => {  console.log("");
 
-//     const selectedBook =  state.cart.items.find(item => item.book._id === book._id);
-// if(selectedBook){
-// selectedBook.count = selectedBook.count + 1;
-// } else {
-//     items.push({ count:1, book:action.payload });
-// }
-
-
-
-
-    // axios.post('http://localhost:8080/cart/add', book)
-    //   .then(response => {          //console.log("RESPONSE-getBooks:",response);
-    //        return response       
-    //     }).then(data => {  console.log("RES.DATA:",data )         //console.log("DATA-getBooksFROMCART:", data);
-    //         dispatch({
+//with axios;
+    // axios
+    //     .post('http://localhost:8080/cart', book)
+    //     .then(response => {     console.log("RESPONSE-ADDBook:",response);
+    //        dispatch({
     //             type: ADDCART, 
-    //             payload: data 
-    //         });
+    //             payload: response
+    //         });      
     //     })
-    //     .catch(() => {
-    //         dispatch({
-    //             type: "ERROR",
-    //             payload: "Error add book from cart", 
-    //         });
-    //     });
-        
-    //     //
-    
+    //     .catch((error) => { alert("catch.error")
+    //         console.log(error.message) });    
 
+//with try catch;
+// const url = 'http://localhost:8080/cart';
+// const addBook = (book:Book) => axios.post(url, book); 
 
-//api;******
-const url = 'http://localhost:8080/cart/add';
-const addBook = (book:Book) => axios.post(url, book); 
-
-try {
-    const  data  = await addBook(book); console.log("DATA:",data.config.data.name);
-    //console.log("book", book);          
-    dispatch({ type: ADDCART, payload: data.config.data });
-} catch (error) {
-    console.log(error.message);
-  }
+// try {
+//     const {data}   = await addBook(book);          console.log("DATA:", data);
+//     //console.log("book", book);          
+//     dispatch({ type: ADDCART, payload: data.config.data });
+// } catch (error) {
+//     console.log(error.message);
+//   }
 //**********
 
+//with fetch:
+// let addedBook = {
+//     "name": book.name,
+//     "author": book.author,
+//     "price": book.price,
+//     "image": book.price,
+//     "count": 1
+// }
 
-
-
-
-
-
-// axios.create({ 
-//         url:'http://localhost:8080',
-//     })
-//     .post(`/cart`)
-//     .then(response => {     alert("then");         //console.log("RESPONSE-getBooks:",response);
-//            return response         
-//         }).then(data => {            //console.log("DATA-getBooksFROMCART:", data);
-//             dispatch({
-//                 type: GET_BOOKS_FROM_CART, 
-//                 payload: data 
-//             });
-//         })
-//         .catch(() => { alert("error");
-//             dispatch({
-//                 type: "ERROR",
-//                 payload: "Error getting books from cart", 
-//             });
-//         });
+// fetch('http://localhost:8080/cart', {
+//     method:"POST",
+//     headers: {"Content-type": "application/json"},
+//     body: JSON.stringify(addedBook)
+// }).then(r=>r.json()).then(res=> {         //console.log("RES:", res)
+//       dispatch({ type: ADDCART, payload: res });
+// }).catch((error)=> {
+//     console.log(error.message);
+// })
  
+//update;
+let addedBook = {
+    "name": book.name,
+    "author": book.author,
+    "price": book.price,
+    "image": book.price,
+    //"count": count + 1,
+    "count": 5
+}
+//const cartId = book._id; alert(cartId);
+const cartId = "60c335bd33c03354884ac193";   //alert(cartId);
+fetch(`http://localhost:8080/cart/${cartId}`, {
+    method:"PATCH",
+    headers: {"Content-type": "application/json"},
+    body: JSON.stringify(addedBook)
+}).then(r=>r.json()).then(res=> {         //console.log("RES:", res)
+      dispatch({ type: ADDCART, payload: res });
+}).catch((error)=> { alert("error");
+    console.log(error.message);
+})
+
+
 
 }

@@ -1,4 +1,4 @@
-import { data } from "../data";
+//import { data } from "../data";
 //import { applyMiddleware, createStore } from "redux";
 import { Book,  CartModel, ADD_TO_CART, REMOVE_FROM_CART, INCREASE_CART, DECREASE_CART, 
     ListAction, GET_BOOKS, GET_BOOKS_FROM_CART, CartItem, ADDCART } from '../types';
@@ -46,7 +46,8 @@ export const  reducer = (
 
         
 
-        case GET_BOOKS:       console.log("REDUCER action.Payload:", action.payload);            
+        case GET_BOOKS:     
+          console.log("REDUCER action.Payload:", action.payload);            
         // let Books : Book[] = [];        
         // Books.push(action.payload); //console.log("Books[0]:", Books[0]);   
         
@@ -67,7 +68,7 @@ export const  reducer = (
 
 
 
-            case GET_BOOKS_FROM_CART:   console.log("BB222:", action.payload);   
+        case GET_BOOKS_FROM_CART:   //console.log("BB222:", action.payload);   
 // let Items : CartItem[] = [];
 // Items.push(action.payload);
 // return {...state,
@@ -91,8 +92,7 @@ export const  reducer = (
 
 
 
-
-        case ADDCART : console.log("ADD:",action.payload.name);
+        case ADDCART : console.log("ADD-reducers:",action.payload);
         //case ADD_TO_CART:  console.log("ADD:",action.payload);
             const addBook = items.find(item => item.book._id === action.payload._id) 
             if(addBook){

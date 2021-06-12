@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 const Cart = (props:{ cart:CartModel, decrease:Function, 
     removeFromCart: Function, increase: Function}) => { 
 
-    const cart:CartModel = useSelector((state:ReducerState) => state.cart); //console.log("SELECTOR.cart:", cart);
+    const cart:CartModel = useSelector((state:ReducerState) => state.cart); console.log("SELECTOR.cart:", cart);
     const dispatch = useDispatch();
 
 console.log("CARTITEMS:", cart.items);     
