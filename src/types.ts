@@ -24,12 +24,12 @@ interface DecreaseCartAction {
 }
 interface GetBooksAction {
   type: typeof GET_BOOKS;
-  payload: Book;
+  payload: Book[];
 }
 
 interface GetBooksFromCartAction {
   type: typeof GET_BOOKS_FROM_CART;
-  payload: Book;
+  payload: CartItem[];
 }
 
 interface addBookToCart {

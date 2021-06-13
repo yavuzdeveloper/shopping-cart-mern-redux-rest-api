@@ -47,37 +47,18 @@ export const  reducer = (
         
 
         case GET_BOOKS:     
-          console.log("REDUCER action.Payload:", action.payload);            
-        //let Books : Book[] = [];        
-        //Books.push(action.payload); 
-        //console.log("Books[0]:", Books[0]);   
-        //const array: Book[] = [...Book, ]
-        // return { ...state, 
-        //     books: [...state.books, action.payload] 
-        // } 
+            return { ...state, books: action.payload };
 
-
-       // return { ...state, books: [...state.books, ...Books]  }
-          return { ...state, books: action.payload} 
-           
-            // return { ...state, 
-            //     books: [...state.books, action.payload]
-            // };
-           
-             // console.log("CC", state.books[0]);
-          
-            // console.log("STATE.BOOKS:", state.books);
-            //return state;        
-
-
-
-        case GET_BOOKS_FROM_CART:   //console.log("BB222:", action.payload);   
+        case GET_BOOKS_FROM_CART:   
+        console.log("GET_BOOKS_FROM_CART:", action.payload);   
 // let Items : CartItem[] = [];
 // Items.push(action.payload);
 // return {...state,
-//     cart: {items:Items}   
+//     cart: {...state.cart.items,
+//     items: [...state.cart.items, action.payload]}   
 // }; 
- return state;
+ 
+return state;
 
 // case ADDCART :  console.log("ADDCART:",action.payload.price);
 // return {...state,

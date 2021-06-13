@@ -14,31 +14,20 @@ import { getBooks } from './actions';
 const Products = (props:{ books: Book[], addToCart: Function,  cart:CartModel }) => {
 
 
-const books:Book[] = useSelector((state:ReducerState) => state.books); 
-                                              console.log("SELECTOR.books:", books);
-                                              //console.log("SELECTOR.books[0]:", books[0]);
-// const [bookList, setBookList] = useState([] as Book[]); 
-// books.map(item => {
-// //console.log("BOOK:",item);
-// });                                              
+  const books:Book[] = useSelector((state:ReducerState) => state.books);                                                                        
+  const cart:CartModel = useSelector((state:ReducerState) => state.cart); 
 
-
-const cart:CartModel = useSelector((state:ReducerState) => state.cart); 
-
-const [dataApi, setDataApi] = useState([]as Book[]);  
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => { 
-
-      fetch("http://localhost:8080/books")
-        .then(response => {           
-          //console.log("RESULT:", response)
-          return response.json();
-        }).then(data => {          
-          //console.log("DATA:",data)
-          setDataApi(data);
-        })
-
+      // fetch("http://localhost:8080/books")
+      //   .then(response => {           
+      //     //console.log("RESULT:", response)
+      //     return response.json();
+      //   }).then(data => {          
+      //     //console.log("DATA:",data)
+      //     setDataApi(data);
+      //   })
         dispatch(getBooks());
   }, []);
   
@@ -53,9 +42,7 @@ const dispatch = useDispatch();
         </div>
       </h3>
       <div> 
-        {/* {dataApi.map((book:Book) => ( */}
         { books.map((book:Book) => (
-        // {props.books.map((book:Book) => (
           <div className="book">
             <img src={book.image} alt={book.name} />
               <div className="bookContent"  key={book._id}>

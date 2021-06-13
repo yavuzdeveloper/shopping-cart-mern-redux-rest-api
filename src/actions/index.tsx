@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { ThunkDispatch } from 'redux-thunk';
 // import { request } from 'node:https';
-import { Book, ADD_TO_CART, REMOVE_FROM_CART, DECREASE_CART, INCREASE_CART, 
+import { Book, CartItem, ADD_TO_CART, REMOVE_FROM_CART, DECREASE_CART, INCREASE_CART, 
     GET_BOOKS, GET_BOOKS_FROM_CART, ADDCART } from '../types';
 //import { api, addBookCart, insertBook } from "../util/APIUtils";
 
@@ -59,18 +59,26 @@ export const decrease = (book:Book) => {
             });
     }
 
+    interface DispatchGetBooksFromCart  {
+        type: string;
+        payload: CartItem[];
+    }
 
-export const getBooksFromCart = () => (dispatch:any)=> { 
+export const getBooksFromCart = () => (dispatch:(arg:DispatchGetBooksFromCart) => (DispatchGetBooksFromCart)) => { 
       fetch("http://localhost:8080/cart")
-        .then(response => {          //console.log("RESPONSE-getBooks:",response);
+        .then(response => {          
+            // console.log("RESPONSE-getBooks:",response);
            return response.json();          
-        }).then(data => {            //console.log("DATA-getBooksFROMCART:", data);
+        }).then((data:CartItem[] ) => {            
+            // console.log("BOOKS-getBooksFROMCART:", books);
             dispatch({
                 type: GET_BOOKS_FROM_CART, 
                 payload: data 
             });
         })
-        .catch((error) => { console.log(error.message) });
+        .catch(error => { 
+            console.log(error.message) 
+        });
 }
 
 //add yaparken eğer cart içinde selectedbook varsa onun count unu bir attırcaz yani sepetteki book u update yapcaz,
