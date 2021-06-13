@@ -3,18 +3,9 @@ import './App.css';
 import Products from './Products';
 import Cart from './Cart';
 import { Route } from "react-router-dom";
-// import { useEffect, useState } from "react";
-// import axios from "axios";
-// import { Book } from './types';
-// import { useDispatch } from 'react-redux';
-// import { getBooks } from './actions';
-
 
 
 const App = (props:any) => {
- 
-
-
 
   return (
     <div className="App">

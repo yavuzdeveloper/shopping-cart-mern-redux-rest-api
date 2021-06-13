@@ -5,7 +5,6 @@ import { addToCart, addBookToCart } from './actions'
 import { Book, CartModel } from './types';
 import { ReducerState } from './reducers';
 import { useEffect, useState } from "react";
-//import axios from "axios";
 import { useDispatch } from 'react-redux';
 import { getBooks } from './actions';
 
